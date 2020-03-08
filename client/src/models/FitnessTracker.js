@@ -1,4 +1,4 @@
-export const Day = 3;
+export const CurrentDay = 3;
 
 export const Exercises = [
     {
