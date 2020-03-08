@@ -1,5 +1,5 @@
 const exerciseCategories = [
-    "Aerobic/Cardio",
+    "Cardio",
     "Strength",
     "Flexibility", 
     "Balance"
