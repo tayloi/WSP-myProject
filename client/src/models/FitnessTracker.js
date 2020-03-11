@@ -16,7 +16,15 @@ export const Exercises = [
         Strength: [],
         Flexibility: ["Stretch"],
         Balance: []
-    }
+    },
+    {
+        Day: 3,
+        Date: "",
+        Cardio: [],
+        Strength: [],
+        Flexibility: [],
+        Balance: []
+    },
 ];
 
 export const Food = [
@@ -34,6 +42,13 @@ export const Food = [
         Meals: [
             "Mozzarella, tomato, and pesto sandwich",
             "Vegetarian burrito bowl"
+        ]
+    },
+    {
+        Day: 3,
+        Date: "",
+        Meals: [
+            ""
         ]
     }
 ];
