@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../views/Home.vue';
-import Progress from '../views/Progress.vue';
+import FitnessTracker from '../views/FitnessTracker.vue';
 import Login from '../views/Login.vue';
 import {CurrentUser} from '../models/Users';
 
@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/progress', name: 'Progress', component: Progress, meta: {isSecret: true} },
+  { path: '/fitnesstracker', name: 'Fitness Tracker', component: FitnessTracker, meta: {isSecret: true} },
   { path: '/login', name: 'Login', component: Login },
   {
     path: '/about',

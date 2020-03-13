@@ -44,7 +44,7 @@
             login(){
                 try {
                     Login(this.email, this.password);
-                    this.$router.push('/progress');
+                    this.$router.push('/fitnesstracker');
                 } catch (error) {
                     this.error = error;
                 }
