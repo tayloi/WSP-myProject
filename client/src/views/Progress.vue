@@ -20,10 +20,12 @@
 
 <script>
   import {CurrentDay, Exercises, Food} from "../models/FitnessTracker";
-  Init();
 
   export default {
     name: 'Home',
+    created(){
+      Init();
+    },
     data: () => ({
       CurrentDay,
       Exercises,
