@@ -4,12 +4,13 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Progress from '../views/Progress.vue';
 import Login from '../views/Login.vue';
+import {CurrentUser} from '../models/Users';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
-  { path: '/progress', name: 'Progress', component: Progress },
+  { path: '/progress', name: 'Progress', component: Progress, meta: {isSecret: true} },
   { path: '/login', name: 'Login', component: Login },
   {
     path: '/about',
@@ -19,12 +20,18 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+router.beforeEach( (to, from, next) => {
+  if( to.meta.isSecret && !CurrentUser) next('/login');
+  else next();
+});
+
+
+export default router;
