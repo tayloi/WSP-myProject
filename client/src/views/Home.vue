@@ -2,7 +2,7 @@
   <section class="container">
     <div class="hero">
         <h1 class="title">
-          Home Page
+          Welcome to the fitness tracker!
         </h1>
     </div>
   </section>
