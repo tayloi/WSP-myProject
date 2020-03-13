@@ -5,4 +5,11 @@ const exerciseCategories = [
     "Balance"
 ];
 
-module.exports = exerciseCategories;
+function add(category){
+    exerciseCategories.push(category);
+}
+
+module.exports = {
+    list: exerciseCategories,
+    add: add
+}
