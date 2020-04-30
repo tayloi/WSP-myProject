@@ -1,4 +1,9 @@
-export const CurrentDay = 3;
+/* FITNESS TRACKER MODEL
+ * Client side
+ */
+import {CurrentUser} from "./Users";
+
+export let CurrentDay;
 
 export const Exercises = [
     {
@@ -52,3 +57,5 @@ export const Food = [
         ]
     }
 ];
+
+export const MyFriends = [];
