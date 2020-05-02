@@ -1,3 +1,6 @@
+/* USERS MODEL
+ * Client side
+ */
 const Users = [
     { Name: 'Imani', Password: '2020', Email: 'taylori1@newpaltz.edu', isAdmin: true },
     { Name: 'User1', Password: '1234', Email: 'user1@newpaltz.edu', isAdmin: false }
