@@ -2,60 +2,113 @@
  * Client side
  */
 import {CurrentUser} from "./Users";
+import Users from "./Users";
 
-export let CurrentDay;
+export let CurrentDate = new Date(Date.now());
+//export let CurrentDay; <-- to be implemented later
 
 export const Exercises = [
     {
-        Day: 1,
-        Date: "03-06-2020",
+        //Day: 1,
+        Date: new Date(2020, 02, 06), //March 6, 2020
         Cardio: [],
         Strength: [],
         Flexibility: [],
         Balance: []
     },
     {
-        Day: 2,
-        Date: "03-07-2020",
+        //Day: 2,
+        Date: new Date(2020, 02, 07), //March 7, 2020
         Cardio: ["Walk"],
         Strength: [],
         Flexibility: ["Stretch"],
         Balance: []
-    },
-    {
-        Day: 3,
-        Date: "",
-        Cardio: [],
-        Strength: [],
-        Flexibility: [],
-        Balance: []
-    },
+    }
 ];
 
 export const Food = [
     {
-        Day: 1,
-        Date: "03-06-2020",
+        //Day: 1,
+        Date: new Date(2020, 02, 06), //March 6, 2020
         Meals: [
             "Impossible burger and french fries",
             "Spaghetti with tomato sauce"
         ]
     },
     {
-        Day: 2,
-        Date: "03-07-2020",
+        //Day: 2,
+        Date: new Date(2020, 02, 07), //March 7, 2020
         Meals: [
             "Mozzarella, tomato, and pesto sandwich",
             "Vegetarian burrito bowl"
-        ]
-    },
-    {
-        Day: 3,
-        Date: "",
-        Meals: [
-            ""
         ]
     }
 ];
 
 export const MyFriends = [];
+
+export function addExercise(year, month, day, cardio, strength, flexibility, balance){
+    if(Exercises != null){ //if Exercises not empty
+        let d = new Date(year, month, day);
+        //check if exercises have been entered with current date
+        for(e in Exercises){  
+            if (e[Date] == d){
+                e.Cardio.push(cardio);
+                e.Strength.push(strength);
+                e.Flexibility.push(flexibility);
+                e.Balance.push(balance);
+                return;
+            }
+        }
+    }
+    else{ //Exercises is empty
+        Exercises.push({
+            Date: new Date(year, month, day),
+            Cardio: [cardio],
+            Strength: [strength],
+            Flexibility: [flexibility],
+            Balance: [balance]
+        });
+    }
+}
+
+export function addFood(year, month, day, meal){
+    if(Food != null){ //if Food not empty
+        let d = new Date(year, month, day);
+        //check if meals have been entered with current date
+        for(f in Food){
+            if (f[Date] == d){
+                f.Meals.push(meal);
+                return;
+            }
+        }
+    }
+    else{ //Food is empty
+        Food.push({
+            Date: new Date(year, month, day),
+            Meals: [meal]
+        });
+    }
+}
+
+export function addFriend(name){
+    //check that user exists
+    for(u in Users){
+        if(u.Name == name){
+            let friend = u;
+        }
+        else{
+            throw Error("This user does not exist.");
+        }
+    }
+    //check friend not already added
+    if(MyFriends != null){
+        for(f in MyFriends){
+            if(f == friend){
+                throw Error("You are already friends with this user.");
+            }
+        }
+        //else friend not added yet
+        MyFriends.push(friend);
+    }
+}
