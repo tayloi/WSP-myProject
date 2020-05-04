@@ -10,7 +10,7 @@ export let CurrentDate = new Date(Date.now());
 export const Exercises = [
     {
         //Day: 1,
-        Date: new Date(2020, 02, 06), //March 6, 2020
+        Date: new Date(2020, 2, 6), //March 6, 2020
         Cardio: [],
         Strength: [],
         Flexibility: [],
@@ -18,7 +18,7 @@ export const Exercises = [
     },
     {
         //Day: 2,
-        Date: new Date(2020, 02, 07), //March 7, 2020
+        Date: new Date(2020, 2, 7), //March 7, 2020
         Cardio: ["Walk"],
         Strength: [],
         Flexibility: ["Stretch"],
@@ -29,7 +29,7 @@ export const Exercises = [
 export const Food = [
     {
         //Day: 1,
-        Date: new Date(2020, 02, 06), //March 6, 2020
+        Date: new Date(2020, 2, 6), //March 6, 2020
         Meals: [
             "Impossible burger and french fries",
             "Spaghetti with tomato sauce"
@@ -37,7 +37,7 @@ export const Food = [
     },
     {
         //Day: 2,
-        Date: new Date(2020, 02, 07), //March 7, 2020
+        Date: new Date(2020, 2, 7), //March 7, 2020
         Meals: [
             "Mozzarella, tomato, and pesto sandwich",
             "Vegetarian burrito bowl"
