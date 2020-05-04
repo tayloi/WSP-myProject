@@ -1,6 +1,11 @@
+/* index.js
+ * Server side
+ */
 const express = require('express');
-const exerciseCategories = require('./controllers/fitnessTracker');
 const path = require('path');
+
+const fitnessTrackerController = require('./controllers/fitnessTracker');
+const usersController = require('./controllers/users')
 
 const app = express();
 const port = 3000;
@@ -12,6 +17,7 @@ app
     .get('/', (req, res) => res.send('Welcome to the fitness tracker!')) // <-- lamda expression used here and below
 //when msg sent w/verb 'get' and '/', call this funciton
     .use('/fitnessTracker', fitnessTrackerController)
+    .use('/users', usersController)
     
     .use((req, res) => {
         const homePath = path.join( __dirname , '/../client/dist/index.html');
