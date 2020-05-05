@@ -1,8 +1,7 @@
 /* FITNESS TRACKER MODEL
  * Server side
  */
-const CurrentUser = require("./Users");
-//import Users from "./Users";
+const users = require("./Users");
 
 let CurrentDay = new Date(Date.now());
 
@@ -36,70 +35,63 @@ const MyFriends = [
 ];
 
 
-function addExercise(year, month, day, cardio, strength, flexibility, balance){
-    if(Exercises != null){ //if Exercises not empty
-        let d = new Date(year, month, day);
-        //check if exercises have been entered with current date
-        for(e in Exercises){  
-            if (e[Date] == d){
-                e.Cardio.push(cardio);
-                e.Strength.push(strength);
-                e.Flexibility.push(flexibility);
-                e.Balance.push(balance);
-                return;
-            }
+function addExercise(year, month, day, exerciseCategory, exercise){
+    let d = new Date(year, month, day); //date for the new entry
+    
+    //check if exercises have been entered with the date
+    for(e in Exercises){  
+        if (e[Date] == d){
+            e[exerciseCategory].push(exercise);
+            return;
         }
     }
-    else{ //Exercises is empty
-        Exercises.push({
-            Date: new Date(year, month, day),
-            Cardio: [cardio],
-            Strength: [strength],
-            Flexibility: [flexibility],
-            Balance: [balance]
-        });
-    }
+    //Exercises is empty or doesn't contain object with the date; add new object
+    let e = {};
+    e[Date] = d;
+    e[exerciseCategory] = [exercise];
+    Exercises.push(e);
 }
 
 function addFood(year, month, day, meal){
-    if(Food != null){ //if Food not empty
-        let d = new Date(year, month, day);
-        //check if meals have been entered with current date
-        for(f in Food){
-            if (f[Date] == d){
-                f.Meals.push(meal);
-                return;
-            }
+    let d = new Date(year, month, day); //date for the new entry
+    
+    //check if meals have been entered with current date
+    for(food in Food){
+        if (food[Date] == d){
+            food[Meals].push(meal);
+            return;
         }
     }
-    else{ //Food is empty
-        Food.push({
-            Date: new Date(year, month, day),
-            Meals: [meal]
-        });
-    }
+    //Food is empty or doesn't contain object with the date; add new object
+    Food.push({
+        Date: new Date(year, month, day),
+        Meals: [meal]
+    });
+    
 }
 
-function addFriend(name){
+function addFriend(email){
+    let friend;
+    
     //check that user exists
-    for(u in Users){
-        if(u.Name == name){
-            let friend = u;
+    for(u in users){
+        if(u.Email == email){
+            friend = u;
+            break;
         }
         else{
             throw Error("This user does not exist.");
         }
     }
+    
     //check friend not already added
-    if(MyFriends != null){
-        for(f in MyFriends){
-            if(f == friend){
-                throw Error("You are already friends with this user.");
-            }
+    for(f in MyFriends){
+        if(f == friend){ //my friend = new friend to be added
+            throw Error("You are already friends with this user.");
         }
-        //else friend not added yet
-        MyFriends.push(friend);
     }
+    //else friend not added yet
+    MyFriends.push(friend);
 }
 
 module.exports = {
