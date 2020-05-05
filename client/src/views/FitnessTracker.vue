@@ -21,12 +21,12 @@
         <h5 class="title is-5"> Here is your progress up to today: </h5>
         <ul> 
           <h6 class="title is-6">Exercises</h6>
-          <li v-for="exercise in Exercises">
+          <li v-for="exercise in Exercises" :key="exercise.Date">
             {{exercise}}
           </li>
           <br>
           <h6 class="title is-6">Food</h6>
-          <li v-for="meal in Food">
+          <li v-for="meal in Food" :key="meal.Date">
             {{meal}}
           </li>
         </ul>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  import {CurrentDay, Exercises, Food} from "../models/FitnessTracker";
+  import * as FitnessTracker from "../models/FitnessTracker";
 
   export default {
     name: 'Home',
@@ -44,13 +44,8 @@
       Init();
     },
     data: () => ({
-      CurrentDay,
-      Exercises,
-      Food
-    }),
-    components: {
-
-    }
+      FitnessTracker
+    })
   }
 </script>
 
