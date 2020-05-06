@@ -3,7 +3,9 @@
  */
 const users = require("./Users");
 
-let CurrentDay = new Date(Date.now());
+let CurrentDate = new Date(Date.now());
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let CurrentDateString = CurrentDate.toLocaleDateString("en-US", options);
 
 const Exercises = [
     /* Format
@@ -95,6 +97,7 @@ function addFriend(email){
 }
 
 module.exports = {
-    CurrentDay, Exercises, Food, MyFriends, 
+    CurrentDate, CurrentDateString,
+    Exercises, Food, MyFriends, 
     addExercise, addFood, addFriend
 };

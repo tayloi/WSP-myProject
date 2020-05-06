@@ -6,6 +6,8 @@ import Users from "./Users";
 
 export let CurrentDate = new Date(Date.now());
 //export let CurrentDay; <-- to be implemented later
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+export let CurrentDateString = CurrentDate.toLocaleDateString("en-US", options);
 
 export const Exercises = [
     {
@@ -45,7 +47,10 @@ export const Food = [
     }
 ];
 
-export const MyFriends = [];
+export const MyFriends = [
+    { Name: 'Adam', Password: '2222', Email: 'adam@email.com', userId: 2, isAdmin: false },
+    { Name: 'Branda', Password: '3333', Email: 'branda@email.com', userId: 3, isAdmin: false }
+];
 
 export function addExercise(year, month, day, cardio, strength, flexibility, balance){
     if(Exercises != null){ //if Exercises not empty
