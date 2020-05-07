@@ -178,7 +178,7 @@
 </template>
 
 <script>
-  import * as FitnessTracker from "../models/FitnessTracker";
+  import FitnessTracker from "../models/FitnessTracker";
   import * as exerciseCategories from "../../../server/models/exerciseCategories"
 
   export default {
