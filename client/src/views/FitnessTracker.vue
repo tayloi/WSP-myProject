@@ -3,6 +3,7 @@
   -->
 <template>
   <div class="container">
+    <p v-if="CurrentUser != null">You are logged in as {{CurrentUser.Name}}.</p>
     <h1 class="title is-3 has-text-centered">
       My Fitness
     </h1>
@@ -180,7 +181,8 @@
 <script>
   import FitnessTracker from "../models/FitnessTracker";
   import * as exerciseCategories from "../../../server/models/exerciseCategories"
-
+  import {CurrentUser} from "../models/Users";
+  
   export default {
     name: 'Home',
     created(){
