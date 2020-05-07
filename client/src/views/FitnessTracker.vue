@@ -8,11 +8,11 @@
       My Fitness
     </h1>
 
-    <!--ADD NEW DATA-->
+    <!--ADD NEW DATA
     <div :class="{ 'is-active':isOpen }" @click="isOpen = !isOpen" class="dropdown" style="padding-bottom: 2%">
       <div class="dropdown-trigger">
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-          <span>Dropdown button</span>
+          <span>Add new</span>
           <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -20,26 +20,26 @@
       </div>
       <div :class="{ 'is-active':isOpen }" class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            Dropdown item
-          </a>
-          <a class="dropdown-item">
-            Other dropdown item
-          </a>
-          <a href="#" class="dropdown-item is-active">
-            Active dropdown item
-          </a>
-          <a href="#" class="dropdown-item">
-            Other dropdown item
-          </a>
-          <hr class="dropdown-divider">
-          <a href="#" class="dropdown-item">
-            With a divider
-          </a>
+          <div class="dropdown-item dropdown is-hoverable">
+            <div class="dropdown-trigger">
+                <span>Exercise</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </span>
+            </div>
+          </div>
+          <div class="dropdown-item dropdown is-hoverable">
+            <div class="dropdown-trigger">
+                <span>Meal/snack</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-right" aria-hidden="true"></i>
+                </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
+    -->
     <div class="columns">
       <!--ADD NEW EXERCISE-->
       <div class="card column">
@@ -83,18 +83,18 @@
           <div class="field">
             <label class="label" for="date">Date:</label>
             <div class="control">
-              <input class="input" type="date" id="date">
+              <input class="input" type="date" id="date" name="date">
             </div>
           </div>
           <div class="field">
             <label class="label">Food</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Name/description">
+              <input class="input" type="text" placeholder="Name/description" name="food">
             </div>
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-primary">Submit</button>
+              <button @click="foodSubmit()" class="button is-primary" type="reset" value="reset">Submit</button>
             </div>
           </div>
         </div>
@@ -110,11 +110,11 @@
         <div class="panel">
           <h3 class="panel-heading">Today: {{FitnessTracker.CurrentDateString}}</h3>
           <p class="panel-tabs">
-            <a>Exercises</a>
-            <a>Food</a>
+            <a @click="todayExercises = true; todayFood = false">Exercises</a>
+            <a @click="todayFood = true; todayFood = false">Food</a>
           </p>
           <!--TABLE OF EXERCISES-->
-          <table class="table is-fullwidth is-hoverable">
+          <table  :class="{ 'is-active':todayExercises, 'is-hidden':!todayExercises }" class="table is-fullwidth is-hoverable">
             <tr>
               <th v-for="category in exerciseCategories.list" :key="category">
                 {{category}}
@@ -127,7 +127,7 @@
             </tr>
           </table>
           <!--LIST OF FOOD-->
-          <li class="panel-block">
+          <li :class="{ 'is-active':todayFood, 'is-hidden':!todayFood }" class="panel-block">
             
           </li>
         </div>
@@ -191,7 +191,9 @@
     data: () => ({
       FitnessTracker,
       exerciseCategories,
-      isOpen: false
+      isOpen: false,
+      todayExercises: true,
+      todayFood: false,
     }),
     methods: {
       //function to get the longest exerciseCategory array from an object in Exercises
@@ -213,8 +215,16 @@
           }
         }
         return array;
-      } //end of longestCategoryArray function
+      }, //end of longestCategoryArray function
+      exerciseSubmit: function(){
 
+      },
+      foodSubmit: function(){
+        console.log("in foodSubmit")
+        let d = document.querySelector('[name="date"]').value;
+        let m = document.querySelector('[name="food"]').value;
+        FitnessTracker.addFood(d, m);
+      }
     }
   }
 </script>
