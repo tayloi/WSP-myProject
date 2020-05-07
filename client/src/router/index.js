@@ -9,9 +9,10 @@ import {CurrentUser} from '../models/Users';
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', name: 'Home', component: Home },
+  { path: '/', name: 'Home', component: Home, meta: {isSecret: true} },
   { path: '/fitnesstracker', name: 'Fitness Tracker', component: FitnessTracker, meta: {isSecret: true} },
   { path: '/login', name: 'Login', component: Login },
+  { path: '/logout', name: 'Logout', meta: {CurrentUser: null} },
   {
     path: '/about',
     name: 'About',
@@ -29,7 +30,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach( (to, from, next) => {
-  if( to.meta.isSecret && !CurrentUser) next('/login');
+  if(to.meta.isSecret && !CurrentUser) next('/about');
   else next();
 });
 

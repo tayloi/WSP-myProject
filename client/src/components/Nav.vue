@@ -2,11 +2,11 @@
   <nav role="navigation" aria-label="main navigation" style="padding-bottom: 2%">
     <div class="navbar has-background-grey-lighter">
       <div class="navbar-brand">
-        <a class="navbar-item has-background-primary" href="/">
+        <router-link to="/" class="navbar-item has-background-primary">
           <i class="fas fa-running"></i>
           <span class="" style="padding: 0 5px 0 5px">FitnessTracker</span> 
           <i class="far fa-calendar-alt"></i>
-        </a>
+        </router-link>
 
         <a :class="{ 'is-active':isOpen }" @click="isOpen = !isOpen" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" >
           <span aria-hidden="true"></span>
@@ -30,6 +30,9 @@
               </a>
               <a class="button is-light" href="/login">
                 Log in
+              </a>
+              <a class="button is-light" href="/logout">
+                Log out
               </a>
             </div>
           </div>
