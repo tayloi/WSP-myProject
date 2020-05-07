@@ -33,17 +33,18 @@
 <script>
     import { Login } from "../models/Users";
     export default {
-         data(){
-        return {
-            email: '',
-            password: '',
-            error: ''
-        }
+        data(){
+            return {
+                email: '',
+                password: '',
+                error: ''
+            }
         },
         methods: {
-            login(){
+            async login(){
                 try {
-                    Login(this.email, this.password);
+                    //call await so rest of function doesn't get run until login throws error or returns
+                    await Login(this.email, this.password); 
                     this.$router.push('/fitnesstracker');
                 } catch (error) {
                     this.error = error;

@@ -85,7 +85,7 @@ export function addFriend(name){
 }
 
 export function Init(){
-    myFetch('http://localhost:3000/game') //returns a Promise
+    myFetch('/fitnessTracker') //returns a Promise
         //every time fitness tracker gets initialized, fetch state from server
         .then(x => {
             State = x;	
