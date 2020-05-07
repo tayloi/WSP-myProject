@@ -3,54 +3,20 @@
  */
 import {CurrentUser} from "./Users";
 import Users from "./Users";
+import myFetch from "./myFetch";
+
+export let State = {};
 
 export let CurrentDate = new Date(Date.now());
 //export let CurrentDay; <-- to be implemented later
 let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 export let CurrentDateString = CurrentDate.toLocaleDateString("en-US", options);
 
-export const Exercises = [
-    {
-        //Day: 1,
-        Date: new Date(2020, 2, 6), //March 6, 2020
-        Cardio: [],
-        Strength: [],
-        Flexibility: [],
-        Balance: []
-    },
-    {
-        //Day: 2,
-        Date: new Date(2020, 2, 7), //March 7, 2020
-        Cardio: ["Walk"],
-        Strength: [],
-        Flexibility: ["Stretch"],
-        Balance: []
-    }
-];
+export const Exercises = [];
 
-export const Food = [
-    {
-        //Day: 1,
-        Date: new Date(2020, 2, 6), //March 6, 2020
-        Meals: [
-            "Impossible burger and french fries",
-            "Spaghetti with tomato sauce"
-        ]
-    },
-    {
-        //Day: 2,
-        Date: new Date(2020, 2, 7), //March 7, 2020
-        Meals: [
-            "Mozzarella, tomato, and pesto sandwich",
-            "Vegetarian burrito bowl"
-        ]
-    }
-];
+export const Food = [];
 
-export const MyFriends = [
-    { Name: 'Adam', Password: '2222', Email: 'adam@email.com', userId: 2, isAdmin: false },
-    { Name: 'Branda', Password: '3333', Email: 'branda@email.com', userId: 3, isAdmin: false }
-];
+export const MyFriends = [];
 
 export function addExercise(year, month, day, cardio, strength, flexibility, balance){
     if(Exercises != null){ //if Exercises not empty
@@ -116,4 +82,13 @@ export function addFriend(name){
         //else friend not added yet
         MyFriends.push(friend);
     }
+}
+
+export function Init(){
+    myFetch('http://localhost:3000/game') //returns a Promise
+        //every time fitness tracker gets initialized, fetch state from server
+        .then(x => {
+            State = x;	
+            console.log(x);
+        })
 }

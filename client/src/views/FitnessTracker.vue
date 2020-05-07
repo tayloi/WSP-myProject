@@ -183,6 +183,9 @@
 
   export default {
     name: 'Home',
+    created(){
+      FitnessTracker.Init();
+    },
     data: () => ({
       FitnessTracker,
       exerciseCategories,
