@@ -1,7 +1,7 @@
 /* USERS MODEL
  * Client side
  */
-import myFetch, {User} from "./myFetch";
+import myFetch from "./myFetch";
 
 export let CurrentUser = null;
 
