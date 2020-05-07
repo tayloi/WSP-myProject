@@ -7,9 +7,40 @@
       My Fitness
     </h1>
 
-    <!--Add new data-->
+    <!--ADD NEW DATA-->
+    <div :class="{ 'is-active':isOpen }" @click="isOpen = !isOpen" class="dropdown" style="padding-bottom: 2%">
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+          <span>Dropdown button</span>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div :class="{ 'is-active':isOpen }" class="dropdown-menu" id="dropdown-menu" role="menu">
+        <div class="dropdown-content">
+          <a href="#" class="dropdown-item">
+            Dropdown item
+          </a>
+          <a class="dropdown-item">
+            Other dropdown item
+          </a>
+          <a href="#" class="dropdown-item is-active">
+            Active dropdown item
+          </a>
+          <a href="#" class="dropdown-item">
+            Other dropdown item
+          </a>
+          <hr class="dropdown-divider">
+          <a href="#" class="dropdown-item">
+            With a divider
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div class="columns">
-      <!--Add new exercise-->
+      <!--ADD NEW EXERCISE-->
       <div class="card column">
         <p class="is-size-5"><strong>Add new exercise</strong></p>
         <div class="card-content">
@@ -32,7 +63,7 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Exercise</label>
+            <label class="label">Activity</label>
             <div class="control">
               <input class="input" type="text" placeholder="Name/description">
             </div>
@@ -44,9 +75,9 @@
           </div>
         </div>
       </div>
-       <!--Add new meal-->
+       <!--ADD NEW FOOD-->
       <div class="card column">
-        <p class="is-size-5"><strong>Add new meal</strong></p>
+        <p class="is-size-5"><strong>Add new meal/snack</strong></p>
         <div class="card-content">
           <div class="field">
             <label class="label" for="date">Date:</label>
@@ -55,7 +86,7 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Meal</label>
+            <label class="label">Food</label>
             <div class="control">
               <input class="input" type="text" placeholder="Name/description">
             </div>
@@ -70,19 +101,63 @@
     </div>
     
 
-    <!--Current day activity-->
+    
     <div class="columns">
-      <div class="card column">
-        <div class="card-content">
-          <h3 class="title is-3">Today: {{FitnessTracker.CurrentDateString}}</h3>
-          <h4 class="title is-4">+Activity</h4>
-          <h4 class="title is-4">+Meal</h4>
+      
+      <!--CURRENT DAY ACTIVITY-->
+      <div class="column">
+        <div class="panel">
+          <h3 class="panel-heading">Today: {{FitnessTracker.CurrentDateString}}</h3>
+          <p class="panel-tabs">
+            <a>Exercises</a>
+            <a>Food</a>
+          </p>
+          <!--TABLE OF EXERCISES-->
+          <table class="table is-fullwidth is-hoverable">
+            <tr>
+              <th v-for="category in exerciseCategories.list" :key="category">
+                {{category}}
+              </th>
+            </tr>
+            <tr v-for="i in longestCategoryArray(FitnessTracker.CurrentDate).length" :key="i">
+              <td v-for="category in exerciseCategories.list" :key="category">
+                {{FitnessTracker.Exercises[category][i-1]}}
+              </td>
+            </tr>
+          </table>
+          <!--LIST OF FOOD-->
+          <li class="panel-block">
+            
+          </li>
         </div>
       </div>
-      <!--Past activity-->
-      <div class="card column">
-        <div class="card-content">
-          <h3 class="title is-3">History</h3>
+      
+      <!--PAST ACTIVITY-->
+      <div class="column">
+        <div class="panel">
+          <h3 class="panel-heading">History</h3>
+          <p class="panel-tabs">
+            <a>Exercises</a>
+            <a>Food</a>
+          </p>
+          <!--TABLE OF EXERCISES-->
+          <table class="table is-fullwidth is-hoverable">
+            <tr>
+              <th v-for="category in exerciseCategories.list" :key="category">
+                {{category}}
+              </th>
+            </tr>
+            <tr v-for="i in longestCategoryArray(new Date(2020, 2, 6)).length" :key="i">
+              <td v-for="category in exerciseCategories.list" :key="category">
+                {{FitnessTracker.Exercises[category][i-1]}}
+              </td>
+            </tr>
+          </table>
+          <!--LIST OF FOOD-->
+          <li class="panel-block" v-for="meal in FitnessTracker.Food" :key="meal">
+            {{meal}}
+          </li>
+          <!--
           <ul> 
             <h6 class="title is-6">Exercises</h6>
             <li v-for="exercise in FitnessTracker.Exercises" :key="exercise.Date">
@@ -94,6 +169,7 @@
               {{meal}}
             </li>
           </ul>
+          -->
         </div>
       </div>
     </div>
@@ -107,23 +183,35 @@
 
   export default {
     name: 'Home',
-    created(){
-      Init();
-    },
     data: () => ({
       FitnessTracker,
-      exerciseCategories
-    })
+      exerciseCategories,
+      isOpen: false
+    }),
+    methods: {
+      //function to get the longest exerciseCategory array from an object in Exercises
+      longestCategoryArray: function(date){
+        let array = [];
+        let exercise, e, i;
+        
+        //get exercise from CurrentDate
+        for(e in FitnessTracker.Exercises){  
+            if (e[Date] == date){
+              exercise = e;
+            }
+        }
+        if(exercise){
+          for (i = 1; i<exercise.length; i++){
+            if(exercise[i].length > array.length){
+              array = property;
+            }
+          }
+        }
+        return array;
+      } //end of longestCategoryArray function
+
+    }
   }
-  
-  /*
-  // Get all "dropdown" elements
-  const $hasDropdowns = Array.prototype.slice.call(document.querySelectorAll(".dropdown"), 0);
-  let dropdown = document.querySelector('.dropdown');
-  dropdown.addEventListener('click', function(event) {
-      event.stopPropagation();
-      dropdown.classList.toggle('is-active');
-  });*/
 </script>
 
 <style>
