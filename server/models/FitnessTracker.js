@@ -37,12 +37,10 @@ const MyFriends = [
 ];
 
 
-function addExercise(year, month, day, exerciseCategory, exercise){
-    let d = new Date(year, month, day); //date for the new entry
-    
+function addExercise(date, exerciseCategory, exercise){
     //check if exercises have been entered with the date
     for(e in Exercises){  
-        if (e[Date] == d){
+        if (e[Date] == date){
             e[exerciseCategory].push(exercise);
             return;
         }
@@ -54,12 +52,10 @@ function addExercise(year, month, day, exerciseCategory, exercise){
     Exercises.push(e);
 }
 
-function addFood(year, month, day, meal){
-    let d = new Date(year, month, day); //date for the new entry
-    
+function addFood(date, meal){
     //check if meals have been entered with current date
     for(food in Food){
-        if (food[Date] == d){
+        if (food[Date] == date){
             food[Meals].push(meal);
             return;
         }
@@ -96,8 +92,29 @@ function addFriend(email){
     MyFriends.push(friend);
 }
 
+//get exercises from a date
+function getExercises(date){
+    let e = {};
+    for(e in Exercises){  
+        if (e[Date] == date){
+            return e;
+        }
+    }
+}
+
+//get food from a date
+function getFood(date){
+    let food = {};
+    for(food in Food){  
+        if (food[Date] == date){
+            return food;
+        }
+    }
+}
+
 module.exports = {
     CurrentDate, CurrentDateString,
     Exercises, Food, MyFriends, 
-    addExercise, addFood, addFriend
+    addExercise, addFood, addFriend,
+    getExercises, getFood
 };
