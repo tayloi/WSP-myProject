@@ -17,6 +17,15 @@ app.use(function(req, res, next) {
     next();
 });
 
+//Authorization header middleware
+app.use(function(req, res, next) {
+    const arr = (req.headers.authorization || "").split(" "); //make sure not NULL; throw away everything before space
+    if(arr.length > 1 && arr[1] != null){
+        req.userId = +arr[1]; //adding our own property userId; convert to int
+    }
+    next();
+});
+
 app
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
@@ -32,7 +41,7 @@ app
         res.sendFile(homePath)
     })
     .use( (err, req, res, next) => {
-        console.error(error); //log (print) error in red
+        console.error(err); //log (print) error in red
         const errorCode = err.code || 500; //way to shortcircuit in JS
         res.status(errorCode).send({ message: err.message });
     } );
