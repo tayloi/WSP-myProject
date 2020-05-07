@@ -2,7 +2,7 @@
   <nav role="navigation" aria-label="main navigation" style="padding-bottom: 2%">
     <div class="navbar has-background-grey-lighter">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item has-background-primary">
+        <router-link to="/fitnesstracker" class="navbar-item has-background-primary">
           <i class="fas fa-running"></i>
           <span class="" style="padding: 0 5px 0 5px">FitnessTracker</span> 
           <i class="far fa-calendar-alt"></i>
