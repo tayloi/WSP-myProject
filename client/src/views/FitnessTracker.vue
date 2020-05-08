@@ -2,9 +2,9 @@
   -- This is where users can see their own day-to-day activity.
   -->
 <template>
-  <div class="container">
-    <p v-if="CurrentUser != null">You are logged in as {{CurrentUser.Name}}.</p>
-    <h1 class="title is-3 has-text-centered">
+  <div class="container" style="padding: 0 2% 4% 2%">
+    <p v-if="CurrentUser != null">Logged in as: {{CurrentUser.Name}}</p>
+    <h1 class="title is-3 has-text-centered" style="padding-bottom: 1%">
       My Fitness
     </h1>
 
@@ -48,14 +48,14 @@
           <div class="field">
             <label class="label" for="date">Date:</label>
             <div class="control">
-              <input class="input" type="date" id="date">
+              <input class="input" type="date" id="date" name="exercise-date">
             </div>
           </div>
           <div class="field">
             <label class="label">Category</label>
             <div class="control">
               <div class="select">
-                <select>
+                <select id="category">
                   <option v-for="category in exerciseCategories.list" :key="category">
                     {{category}}
                   </option>
@@ -66,12 +66,12 @@
           <div class="field">
             <label class="label">Activity</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Name/description">
+              <input class="input" type="text" placeholder="Name/description" name="activity">
             </div>
           </div>
           <div class="field is-grouped">
             <div class="control">
-              <button class="button is-primary">Submit</button>
+              <button @click="exerciseSubmit()" class="button is-primary" type="reset" value="reset">Submit</button>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
           <div class="field">
             <label class="label" for="date">Date:</label>
             <div class="control">
-              <input class="input" type="date" id="date" name="date">
+              <input class="input" type="date" id="food-date" name="food-date">
             </div>
           </div>
           <div class="field">
@@ -142,6 +142,9 @@
             <a>Food</a>
           </p>
           <!--TABLE OF EXERCISES-->
+          <li class="panel-block" v-for="exercise in FitnessTracker.Exercises" :key="exercise">
+            {{exercise}}
+          </li>
           <table class="table is-fullwidth is-hoverable">
             <tr>
               <th v-for="category in exerciseCategories.list" :key="category">
@@ -191,6 +194,7 @@
     data: () => ({
       FitnessTracker,
       exerciseCategories,
+      CurrentUser,
       isOpen: false,
       todayExercises: true,
       todayFood: false,
@@ -217,11 +221,13 @@
         return array;
       }, //end of longestCategoryArray function
       exerciseSubmit: function(){
-
+        let d = document.querySelector('[name="exercise-date"]').value;
+        let c = document.querySelector('#category option:checked').value;
+        let e = document.querySelector('[name="activity"]').value;
+        FitnessTracker.addExercise(d, c, e);
       },
       foodSubmit: function(){
-        console.log("in foodSubmit")
-        let d = document.querySelector('[name="date"]').value;
+        let d = document.querySelector('[name="food-date"]').value;
         let m = document.querySelector('[name="food"]').value;
         FitnessTracker.addFood(d, m);
       }
