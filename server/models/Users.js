@@ -19,5 +19,6 @@ module.exports = {
     },
     Get(userId) { //Get: (userId) => Users[userId]
         return Users[userId];
-    } 
+    },
+    list: Users
 }

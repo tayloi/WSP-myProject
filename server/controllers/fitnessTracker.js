@@ -5,7 +5,7 @@ const express = require('express');
 
 const exerciseCategories = require('../models/exerciseCategories');
 const fitnessTracker = require('../models/FitnessTracker');
-
+const users = require('../models/Users')
 const router = express.Router();
 
 router
@@ -31,6 +31,9 @@ router
     .post('/addFriend', (req, res) => {
         fitnessTracker.addFriend(req.body.email);
         res.send(fitnessTracker.MyFriends);
+    })
+    .get('/users', (req, res) => {
+        res.send(users.list.filter(x => x.email.includes(req.query.email)))
     });
 
 module.exports = router; 

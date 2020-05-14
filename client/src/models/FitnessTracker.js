@@ -57,6 +57,9 @@ export default{
         });
         
     },
+    searchUsers(email){
+        return myFetch(`/Users?email=${email}`);
+    },
     addFriend(email){
         let i, u, f, friend;
         

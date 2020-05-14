@@ -75,8 +75,11 @@ function addFood(date, meal){
     Food.push({
         Date: date,
         Meals: [meal]
-    });
-    
+    });  
+}
+
+function searchUsers(email){
+    return myFetch(`/Users?email=${email}`);
 }
 
 function addFriend(email){
@@ -131,5 +134,5 @@ module.exports = {
     CurrentDate, CurrentDateString,
     Exercises, Food, MyFriends, 
     addExercise, addFood, addFriend,
-    getExercises, getFood
+    getExercises, getFood, searchUsers
 };
